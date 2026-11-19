@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sunset Palms Cover Press — GTA-style photo cover maker</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-mark">SP</span>
+    <div>
+      <h1>Sunset Palms Cover Press</h1>
+      <p class="tagline">Turn your photos into a Vice City sunset cover — offline, in your browser.</p>
+    </div>
+  </div>
+  <div class="top-actions">
+    <button id="undo-btn" type="button" class="btn ghost" title="Undo (Ctrl+Z)">Undo</button>
+    <button id="redo-btn" type="button" class="btn ghost" title="Redo (Ctrl+Y)">Redo</button>
+  </div>
+</header>
+
+<main class="layout">
+  <section class="preview-col">
+    <div id="preview-wrap" class="preview-wrap">
+      <canvas id="cover-canvas" aria-label="Live cover preview"></canvas>
+    </div>
+    <p class="hint">Click a panel to select it. Drag inside it to move the photo, scroll to zoom. Double-click a sample to fill every panel with it.</p>
+    <div class="export-row">
+      <span class="export-label">Export PNG:</span>
+      <button type="button" class="btn primary" data-export="square">Square 1080 × 1080</button>
+      <button type="button" class="btn primary" data-export="story">Story 1080 × 1350</button>
+      <button type="button" class="btn primary" data-export="wide">Wide 1920 × 1080</button>
+    </div>
+  </section>
+
+  <aside class="controls">
+    <section class="card">
+      <h2>1 · Photos</h2>
+      <label class="upload-btn" for="photo-input">Upload your photos…</label>
+      <input id="photo-input" type="file" accept="image/*" multiple hidden>
+      <p class="small">Your photos never leave this machine — they are read locally and drawn on the canvas.</p>
+      <h3>Try a sample</h3>
+      <div id="sample-picker" class="sample-picker"></div>
+    </section>
+
+    <section class="card">
+      <h2>2 · Layout</h2>
+      <div id="layout-picker" class="picker"></div>
+      <h2>3 · Grade</h2>
+      <div id="grade-picker" class="picker"></div>
+      <label class="check"><input id="halftone-toggle" type="checkbox" checked> Halftone ink dots</label>
+      <label class="check"><input id="badge-toggle" type="checkbox" checked> Show starburst badge</label>
+    </section>
+
+    <section class="card">
+      <h2>4 · Lettering</h2>
+      <label class="field">Eyebrow<input id="eyebrow-input" type="text" value="WELCOME TO" maxlength="24"></label>
+      <label class="field">Title<input id="title-input" type="text" value="PALM HEAT" maxlength="18"></label>
+      <label class="field">Subtitle (neon script)<input id="subtitle-input" type="text" value="Coastline Summer" maxlength="32"></label>
+      <label class="field">Tagline<input id="tagline-input" type="text" value="VICE CITY SUNSET • PALMS • NEON NIGHTS" maxlength="60"></label>
+      <label class="field">Badge<input id="badge-input" type="text" value="SUMMER 2026" maxlength="16"></label>
+    </section>
+
+    <section class="card">
+      <h2>5 · Selected panel</h2>
+      <p id="panel-label" class="small">Panel 1 of 9 — 9-Panel Grid</p>
+      <p id="panel-photo-label" class="small">Convertible woman</p>
+      <label class="field">Zoom <span id="zoom-value">100%</span>
+        <input id="zoom-slider" type="range" min="100" max="300" value="100">
+      </label>
+      <button id="crop-reset-btn" type="button" class="btn ghost">Reset crop</button>
+    </section>
+
+    <section class="card">
+      <h2>Presets</h2>
+      <div id="preset-picker" class="picker"></div>
+      <p class="small">Photo Cover is the default: 9-panel photo grid, Sunset grade, halftone ink, giant gradient title.</p>
+    </section>
+  </aside>
+</main>
+
+<div id="shot-stage" class="shot-stage" hidden>
+  <canvas id="shot-canvas"></canvas>
+  <pre id="shot-export" hidden></pre>
+</div>
+
+<script type="module" src="src/main.js"></script>
+</body>
+</html>
